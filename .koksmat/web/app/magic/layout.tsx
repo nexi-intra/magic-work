@@ -16,8 +16,8 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { MagicDevProvider } from "./contextprovider";
 import { useContext } from "react";
-import { MagicboxContext } from "@/app/koksmat/magicbox-context";
-import Tracer from "@/app/koksmat/components/tracer";
+import { MagicboxContext } from "@/components/koksmat/magicbox-context";
+import Tracer from "@/components/koksmat/components/tracer";
 
 export default function Layout(props: { children: any }) {
   const magicbox = useContext(MagicboxContext);

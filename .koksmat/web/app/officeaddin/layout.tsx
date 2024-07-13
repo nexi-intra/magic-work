@@ -1,6 +1,6 @@
 import { APPNAME } from "../global";
 import { ContextProvider } from "./contextprovider";
-import { KoksmatProvider } from "@/app/koksmat/contextprovider";
+import { KoksmatProvider } from "@/components/koksmat/contextprovider";
 
 export default function JourneyLayoutRoot(props: {
   children: React.ReactNode;

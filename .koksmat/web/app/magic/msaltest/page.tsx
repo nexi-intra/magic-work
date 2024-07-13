@@ -1,5 +1,5 @@
 "use client";
-import { MSALTest } from "@/app/koksmat/msal/test";
+import { MSALTest } from "@/components/koksmat/msal/test";
 
 export default function Home() {
   return (

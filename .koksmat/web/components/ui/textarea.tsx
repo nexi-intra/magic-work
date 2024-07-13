@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { cn } from "@/app/koksmat/utils";
+import { cn } from "@/components/koksmat/utils";
 
 export interface TextareaProps
   extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {}

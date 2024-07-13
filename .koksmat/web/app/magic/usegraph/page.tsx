@@ -1,6 +1,6 @@
 "use client";
 import { Button } from "@/components/ui/button";
-import { useGraph } from "@/app/koksmat/usegraph";
+import { useGraph } from "@/components/koksmat/usegraph";
 import { useState } from "react";
 
 function UseGraph() {

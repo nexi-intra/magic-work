@@ -2,7 +2,7 @@
 
 import { useContext, useEffect, useState } from "react";
 
-import { useProcess } from "@/app/koksmat/useprocess";
+import { useProcess } from "@/components/koksmat/useprocess";
 
 import { Context, ContextProps, Options } from "./context";
 import { IView } from "./components/viewcards";

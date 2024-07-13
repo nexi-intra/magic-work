@@ -1,4 +1,4 @@
-import { cn } from "@/app/koksmat/utils";
+import { cn } from "@/components/koksmat/utils";
 
 function Skeleton({
   className,

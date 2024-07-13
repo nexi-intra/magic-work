@@ -3,7 +3,7 @@ import * as React from "react";
 
 import { Button } from "@/components/ui/button";
 
-import { formattedMoney } from "@/app/koksmat/formats";
+import { formattedMoney } from "@/components/koksmat/formats";
 import {
   Sheet,
   SheetContent,

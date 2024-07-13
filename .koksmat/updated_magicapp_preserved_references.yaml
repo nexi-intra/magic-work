@@ -1,0 +1,344 @@
+baseattributes:
+  record: &id001
+  - description: This is the tenant.
+    displayname: Tenant
+    hidden: true
+    name: tenant
+    required: true
+    type: string
+  - description: 'Search Index is used for concatenating all searchable fields in
+      a single field making in easier to search
+
+      '
+    displayname: Search Index
+    hidden: true
+    name: searchindex
+    required: true
+    type: string
+  - description: This is the name.
+    displayname: Name
+    name: name
+    required: true
+    type: string
+  - description: This is the description.
+    displayname: Description
+    name: description
+    required: false
+    type: string
+description: ''
+displayname: Work
+entities:
+  activity: &id005
+    additionalattributes:
+    - description: This is the activitymodelversion.
+      displayname: Activity Model Version
+      entity: &id004
+        additionalattributes:
+        - description: This is the activitymodel.
+          displayname: Activity Model
+          entity: &id003
+            additionalattributes:
+            - description: This is the activity.
+              displayname: Activity
+              name: activity
+              required: false
+              searchindex: true
+              type: string
+            baselineattributes: *id001
+            description: Activity Model
+            displayname: Activitymodel
+            name: activitymodel
+          name: activitymodel
+          required: true
+          searchindex: true
+          type: reference
+        - description: This is the version.
+          displayname: Version
+          name: version
+          required: false
+          searchindex: true
+          type: string
+        baselineattributes: *id001
+        description: Activity Model Version
+        displayname: Activitymodelversion
+        name: activitymodelversion
+      name: activitymodelversion
+      required: true
+      type: reference
+    - description: This is the accountable.
+      displayname: Accountable
+      entity: &id002
+        additionalattributes:
+        - description: This is the email.
+          displayname: Email
+          name: email
+          required: false
+          searchindex: true
+          type: string
+        baselineattributes: *id001
+        description: Actor
+        displayname: Actor
+        name: actor
+      name: accountable
+      required: true
+      type: reference
+    - description: This is the responsible.
+      displayname: Responsible
+      entity: *id002
+      name: responsible
+      required: true
+      type: reference
+    - description: This is the started.
+      displayname: Start
+      name: started
+      required: true
+      type: datetime
+    - description: This is the completed.
+      displayname: End
+      name: completed
+      required: false
+      type: datetime
+    - description: This is the stage.
+      displayname: Stage
+      name: stage
+      required: true
+      searchindex: true
+      type: int
+    - description: This is the substage.
+      displayname: Substage
+      name: substage
+      required: true
+      searchindex: true
+      type: int
+    - description: This is the data.
+      displayname: Data
+      name: data
+      required: true
+      type: json
+    baselineattributes: *id001
+    description: Activity
+    displayname: Activity
+    name: activity
+  activitymodel: *id003
+  activitymodelversion: *id004
+  activityversion: &id009
+    additionalattributes:
+    - description: This is the activity.
+      displayname: Activity
+      entity: *id005
+      name: activity
+      required: true
+      type: reference
+    - description: This is the version.
+      displayname: Version
+      name: version
+      required: true
+      type: string
+    - description: This is the accountable.
+      displayname: Accountable
+      entity: *id002
+      name: accountable
+      required: true
+      type: reference
+    - description: This is the responsible.
+      displayname: Responsible
+      entity: *id002
+      name: responsible
+      required: true
+      type: reference
+    - description: This is the started.
+      displayname: Start
+      name: started
+      required: true
+      type: datetime
+    - description: This is the stage.
+      displayname: Stage
+      name: stage
+      required: true
+      type: int
+    - description: This is the substage.
+      displayname: Substage
+      name: substage
+      required: true
+      type: int
+    - description: This is the triggeredby.
+      displayname: Event
+      entity: &id006
+        additionalattributes:
+        - description: This is the eventtype.
+          displayname: Event Type
+          entity: &id007
+            additionalattributes: null
+            baselineattributes: *id001
+            description: Event Type
+            displayname: Eventtype
+            name: eventtype
+          name: eventtype
+          required: true
+          type: reference
+        - description: This is the actor.
+          displayname: Actor
+          entity: *id002
+          name: actor
+          required: true
+          type: reference
+        - description: This is the activity.
+          displayname: Activity
+          entity: *id005
+          name: activity
+          required: true
+          type: reference
+        - description: This is the timestamp.
+          displayname: Timestamp
+          name: timestamp
+          required: true
+          type: datetime
+        baselineattributes: *id001
+        description: Event
+        displayname: Event
+        name: event
+      name: triggeredby
+      required: true
+      type: reference
+    - description: This is the timestamp.
+      displayname: Timestamp
+      name: timestamp
+      required: true
+      type: datetime
+    - description: This is the data.
+      displayname: Data
+      name: data
+      required: true
+      type: json
+    baselineattributes: *id001
+    description: Activity Version
+    displayname: Activityversion
+    name: activityversion
+  actor: *id002
+  event: *id006
+  eventtype: *id007
+magicappversion: v0.0.1
+models:
+  itemMethods: &id008
+  - description: Read a single item
+    displayname: Read
+    name: read
+    parameters:
+    - description: The id of the item
+      displayname: Id
+      name: id
+      required: true
+      type: int64
+    returns:
+      type: object
+  - description: Create a new item
+    displayname: Create
+    name: create
+    parameters:
+    - description: The item to create
+      displayname: Item
+      name: item
+      required: true
+      type: object
+    returns:
+      type: object
+  - description: Update an existing item
+    displayname: Update
+    name: update
+    parameters:
+    - description: The item to update
+      displayname: Item
+      name: item
+      required: true
+      type: object
+    returns:
+      type: object
+  - description: Delete an existing item
+    displayname: Delete
+    name: delete
+    parameters:
+    - description: The id of the item
+      displayname: Id
+      name: id
+      required: true
+      type: int64
+    returns:
+      type: void
+  - description: Search for items
+    displayname: Search
+    name: search
+    parameters:
+    - description: The search query
+      displayname: Query
+      name: query
+      required: true
+      type: string
+    returns:
+      type: page
+name: work
+organisation: magicbutton
+services:
+- description: Manage actors
+  displayname: Actor
+  entity:
+    entity: *id002
+    model: actor
+    objectname: Actor
+    type: record
+  methods: *id008
+  name: actor
+- description: Manage activity models
+  displayname: Activitymodel
+  entity:
+    entity: *id003
+    model: activitymodel
+    objectname: Activity Model
+    type: record
+  methods: *id008
+  name: activitymodel
+- description: Manage activity model versions
+  displayname: Activitymodelversion
+  entity:
+    entity: *id004
+    model: activitymodelversion
+    objectname: Activity Model Version
+    type: record
+  methods: *id008
+  name: activitymodelversion
+- description: Manage activities
+  displayname: Activity
+  entity:
+    entity: *id005
+    model: activity
+    objectname: Activity
+    type: record
+  methods: *id008
+  name: activity
+- description: Manage event types
+  displayname: Eventtype
+  entity:
+    entity: *id007
+    model: eventtype
+    objectname: Event Type
+    type: record
+  methods: *id008
+  name: eventtype
+- description: Manage events
+  displayname: Event
+  entity:
+    entity: *id006
+    model: event
+    objectname: Event
+    type: record
+  methods: *id008
+  name: event
+- description: Manage activity versions
+  displayname: Activityversion
+  entity:
+    entity: *id009
+    model: activityversion
+    objectname: Activity Version
+    type: record
+  methods: *id008
+  name: activityversion
+type: magicservice

@@ -1,5 +1,5 @@
 "use client";
-import { cn } from "@/app/koksmat/utils";
+import { cn } from "@/components/koksmat/utils";
 
 import { usePathname } from "next/navigation";
 export interface AppMap {

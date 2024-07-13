@@ -8,12 +8,12 @@ keep: false
 */
 import type { Metadata } from "next";
 import "./globals.css";
-import { MagicboxProvider } from "@/app/koksmat/magicbox-providers";
-import { MSALWrapper } from "@/app/koksmat/msal/auth";
+import { MagicboxProvider } from "@/components/koksmat/magicbox-providers";
+import { MSALWrapper } from "@/components/koksmat/msal/auth";
 import { TailwindIndicator } from "@/components/tailwind-indicator";
 import { ThemeProvider } from "@/components/theme-provider";
 import Script from "next/script";
-import { ServiceInspector } from "@/app/koksmat/components/service-inspector";
+import { ServiceInspector } from "@/components/koksmat/components/service-inspector";
 
 import { ToastProvider } from "@/components/ui/toast";
 import { CLARITY } from "./global";

@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 
-import { useProcess } from "@/app/koksmat/useprocess";
+import { useProcess } from "@/components/koksmat/useprocess";
 
 interface FileHeader {
   title: string;

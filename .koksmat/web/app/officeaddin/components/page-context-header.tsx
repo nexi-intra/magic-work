@@ -1,14 +1,15 @@
-"use client"
+"use client";
 
-import { useContext } from "react"
-import Link from "next/link"
+import { useContext } from "react";
+import Link from "next/link";
 
+//import { openVScode } from "@/components/koksmat/vscode/server"
 
-
-//import { openVScode } from "@/app/koksmat/vscode/server"
-
-export function PageContextHeader(props: { title: string ,description?:string}) {
-  return null
+export function PageContextHeader(props: {
+  title: string;
+  description?: string;
+}) {
+  return null;
   /*
   const { title,description } = props
   const { tenant, site, kitchen, station, options, domain, currentstation } =

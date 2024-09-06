@@ -8,12 +8,13 @@ keep: false
 
 -- karry sild
 
-CREATE OR REPLACE PROCEDURE proc.undo_delete_auditlog(
+CREATE OR REPLACE FUNCTION proc.undo_delete_auditlog(
     p_actor_name VARCHAR,
     p_params JSONB
+   
 )
-LANGUAGE plpgsql
-AS $BODY$
+RETURNS JSONB LANGUAGE plpgsql 
+AS $$
 DECLARE
     v_id INTEGER;
         v_audit_id integer;  -- Variable to hold the OUT parameter value
@@ -29,6 +30,7 @@ BEGIN
         updated_at = CURRENT_TIMESTAMP,
         updated_by = p_actor_name
     WHERE id = v_id;
+  
 
            p_auditlog_params := jsonb_build_object(
         'tenant', '',
@@ -57,7 +59,11 @@ BEGIN
     }
 }
 ##MAGICAPP-END##*/
-END;
-$BODY$
+
+return jsonb_build_object(
+    'comment','undo_delete',
+    'id',v_id);
+END; 
+$$ 
 ;
 

@@ -9,12 +9,14 @@ keep: false
 
 -- krydder sild
 
-CREATE OR REPLACE PROCEDURE proc.delete_actor(
+CREATE OR REPLACE FUNCTION proc.delete_actor(
     p_actor_name VARCHAR,
-    p_params JSONB
+    p_params JSONB,
+    p_koksmat_sync JSONB DEFAULT NULL
+   
 )
-LANGUAGE plpgsql
-AS $BODY$
+RETURNS JSONB LANGUAGE plpgsql 
+AS $$
 DECLARE
     v_id INTEGER;
     v_hard BOOLEAN;
@@ -44,6 +46,9 @@ BEGIN
             RAISE EXCEPTION 'No records updated. actor ID % not found', v_id ;
         END IF;
     END IF;
+
+     
+
            p_auditlog_params := jsonb_build_object(
         'tenant', '',
         'searchindex', '',
@@ -72,7 +77,14 @@ BEGIN
     }
 }
 ##MAGICAPP-END##*/
+
+
+  return jsonb_build_object(
+    'comment','deleted',
+    'id',v_id
+    
+    );
 END;
-$BODY$
+$$ 
 ;
 

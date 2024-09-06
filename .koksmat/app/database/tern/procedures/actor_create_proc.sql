@@ -9,13 +9,14 @@ keep: false
 
 -- tomat sild
 
-CREATE OR REPLACE PROCEDURE proc.create_actor(
+CREATE OR REPLACE FUNCTION create_actor(
     p_actor_name VARCHAR,
     p_params JSONB,
-    OUT p_id INTEGER
+    p_koksmat_sync JSONB DEFAULT NULL
+   
 )
-LANGUAGE plpgsql
-AS $BODY$
+RETURNS JSONB LANGUAGE plpgsql 
+AS $$
 DECLARE
        v_rows_updated INTEGER;
 v_tenant VARCHAR COLLATE pg_catalog."default" ;
@@ -24,6 +25,7 @@ v_tenant VARCHAR COLLATE pg_catalog."default" ;
     v_description VARCHAR COLLATE pg_catalog."default";
     v_email VARCHAR;
     v_data JSONB;
+    v_id INTEGER;
         v_audit_id integer;  -- Variable to hold the OUT parameter value
     p_auditlog_params jsonb;
 
@@ -62,7 +64,9 @@ BEGIN
         v_email,
         v_data
     )
-    RETURNING id INTO p_id;
+    RETURNING id INTO v_id;
+
+    
 
        p_auditlog_params := jsonb_build_object(
         'tenant', '',
@@ -114,8 +118,13 @@ BEGIN
 
     -- Call the create_auditlog procedure
     CALL proc.create_auditlog(p_actor_name, p_auditlog_params, v_audit_id);
+
+    return jsonb_build_object(
+    'comment','created',
+    'id',v_id);
+
 END;
-$BODY$
+$$ 
 ;
 
 
